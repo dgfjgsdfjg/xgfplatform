@@ -1,0 +1,7 @@
+# Project exclude paths
+/.gradle/
+/app/demo-manager-app/build/
+/app/demo-manager-app/build/classes/java/main/
+/common/demo-auth/build/
+/interface/demo-manager-interface/build/
+/service/demo-service/build/
