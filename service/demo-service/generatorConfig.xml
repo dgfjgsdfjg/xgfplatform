@@ -22,29 +22,29 @@
             <property name="suppressAllComments" value="false"/>
         </commentGenerator>
 
-        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="jdbc:mysql://172.16.48.55:3306/sitbui"
-                        userId="buiadm" password="111()">
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/platform?serverTimezone=Asia/Shanghai"
+                        userId="root" password="123456">
         </jdbcConnection>
 
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="com.cmpay.demo.entity" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.cmpay.xgf.entity" targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
             <property name="trimStrings" value="false"/>
-            <property name="rootClass" value="com.cmpay.demo.entity.BaseDO"/>
+            <property name="rootClass" value="com.cmpay.xgf.entity.BaseDO"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="com.cmpay.demo.mapper" targetProject="src/main/resources">
+        <sqlMapGenerator targetPackage="com.cmpay.xgf.mapper" targetProject="src/main/resources">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.cmpay.demo.dao"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.cmpay.xgf.dao"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
-        <table tableName="sys_menu" domainObjectName="MenuDO" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="users" domainObjectName="UserDO" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
         </table>
     </context>
