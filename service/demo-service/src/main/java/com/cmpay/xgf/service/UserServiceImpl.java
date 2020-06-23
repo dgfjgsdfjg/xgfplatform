@@ -5,6 +5,8 @@ import com.cmpay.xgf.entity.UserDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author xgf
  */
@@ -20,4 +22,35 @@ public class UserServiceImpl implements UserService{
         return userDao.insert(userDO);
 
     }
+
+    @Override
+    public List<UserDO> findUsers(UserDO userDO) {
+
+        return userDao.find(userDO);
+    }
+
+    @Override
+    public int delete(UserDO userDO) {
+
+        return userDao.update(userDO);
+    }
+
+    @Override
+    public List<UserDO> pageFindUsers(UserDO userDO) {
+
+        return userDao.find(userDO);
+    }
+
+
+//    /**
+//     * 分页查询
+//     */
+//    @Override
+//    public PageInfo<UserDO> findUsers(UserInfoQueryBO queryBO) {
+//        UserDO userDO = new UserDO();
+//        BeanUtils.copyProperties(userDO, queryBO);
+//        return PageUtils.pageQueryWithCount(queryBO.getPageNum(), queryBO.getPageSize(), () -> userDao.find(userDO));
+//    }
+
+
 }

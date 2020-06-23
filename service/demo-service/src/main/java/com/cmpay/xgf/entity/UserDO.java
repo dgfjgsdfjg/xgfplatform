@@ -2,63 +2,62 @@
  * @ClassName UserDO
  * @Description 
  * @version 1.0
- * @Date 2020-06-22 10:45:11
+ * @Date 2020-06-23 18:00:19
  */
 package com.cmpay.xgf.entity;
 
 import com.cmpay.lemon.framework.annotation.DataObject;
-import com.cmpay.lemon.framework.id.GeneratedValue;
 
-/**
- * return UserDO
- */
 @DataObject
 public class UserDO extends BaseDO {
     /**
-     * @Fields uId 
+     * @Fields uId 用户id
      */
-//    @GeneratedValue(key="USER_ID")
     private Integer uId;
     /**
-     * @Fields userName 
+     * @Fields name 用户id
+     */
+    private String name;
+    /**
+     * @Fields userName 用户名
      */
     private String userName;
     /**
-     * @Fields password 
+     * @Fields password 用户姓名
      */
     private String password;
     /**
-     * @Fields email 
+     * @Fields email 邮箱
      */
     private String email;
     /**
-     * @Fields status 
+     * @Fields status 用户登陆状态
      */
-    private String status;
+    private Integer status;
     /**
-     * @Fields phone 
+     * @Fields phone 用户电话号码
      */
     private String phone;
     /**
-     * @Fields createBy 
+     * @Fields createBy 创建者
      */
     private String createBy;
     /**
-     * @Fields createDate 
+     * @Fields createDate 创建日期
      */
     private String createDate;
     /**
-     * @Fields updateBy 
+     * @Fields updateBy 更新者
      */
     private String updateBy;
     /**
-     * @Fields updateDate 
+     * @Fields updateDate 更新日期
      */
     private String updateDate;
     /**
-     * @Fields isUsed 
+     * @Fields isUsed 是否被调用
      */
-    private String isUsed;
+    private Integer isUsed;
 
     public Integer getuId() {
         return uId;
@@ -66,6 +65,14 @@ public class UserDO extends BaseDO {
 
     public void setuId(Integer uId) {
         this.uId = uId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getUserName() {
@@ -92,11 +99,11 @@ public class UserDO extends BaseDO {
         this.email = email;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -140,11 +147,11 @@ public class UserDO extends BaseDO {
         this.updateDate = updateDate;
     }
 
-    public String getIsUsed() {
+    public Integer getIsUsed() {
         return isUsed;
     }
 
-    public void setIsUsed(String isUsed) {
+    public void setIsUsed(Integer isUsed) {
         this.isUsed = isUsed;
     }
 }

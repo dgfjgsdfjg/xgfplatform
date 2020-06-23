@@ -2,6 +2,7 @@ dependencies {
     compile 'com.cmpay:cmpay-interface'
 }
 
+
 jar {
     manifest {
         attributes(

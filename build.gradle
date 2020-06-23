@@ -51,6 +51,9 @@ subprojects {
         imports {
             mavenBom "com.cmpay:cmpay-dependencies:${cmpayVersion}"
             mavenBom "com.cmpay:lemon-dependencies:${lemonVersion}"
+
+
+
         }
 
     }
