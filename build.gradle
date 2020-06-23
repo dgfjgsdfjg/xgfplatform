@@ -87,4 +87,5 @@ configure(subprojects.findAll { it.name.matches('\\S*(-interface|-constant|-comm
         }
     }
 }
+
 description = 'cmpay bui manager application'

@@ -1,30 +1,49 @@
 package com.cmpay.xgf.controller;
 
-import com.cmpay.framework.data.request.GenericDTO;
-import com.cmpay.framework.data.response.GenericRspDTO;
-import com.cmpay.lemon.framework.annotation.QueryBody;
+
+import com.cmpay.lemon.framework.utils.IdGenUtils;
+import com.cmpay.xgf.dto.UserDTO;
+import com.cmpay.xgf.service.LoginService;
 import com.cmpay.xgf.service.UserService;
 import com.cmpay.xgf.entity.UserDO;
-import com.cmpay.xgf.enums.MsgEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
  * @author lihuiquan
  */
-@RestController
+@RestController("/user")
 public class UserController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    LoginService loginService;
 
-    @PostMapping("/user")
+    @PostMapping("/regist")
     @ResponseBody
-    public UserDO login(@RequestBody  UserDO userDO) {
+    public UserDO regist(@RequestBody UserDO userDO) {
 
-        userService.login();
+
+        userDO.setuId(2);
+
+        userService.regist(userDO);
 
         return userDO;
+
+    }
+
+    @PostMapping("/login")
+    @ResponseBody
+    public UserDTO login(@RequestBody UserDTO userDTO) {
+
+
+        userDTO.setuId(2);
+
+
+        loginService.login(userDTO);
+
+        return userDTO;
 
     }
 }

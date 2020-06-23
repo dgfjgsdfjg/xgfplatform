@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmpay.xgf.dao.IUserDao" >
+
+    <resultMap id="BaseResultMap" type="com.cmpay.xgf.entity.UserDO" >
+        <id column="u_id" property="uId" jdbcType="INTEGER" />
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="VARCHAR" />
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+        <result column="update_date" property="updateDate" jdbcType="VARCHAR" />
+        <result column="is_used" property="isUsed" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        u_id, user_name, password, email, status, phone, create_by, create_date, update_by, 
+        update_date, is_used
+    </sql>
+
+    <select id="get" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from users
+        where u_id = #{uId,jdbcType=INTEGER}
+    </select>
+
+    <delete id="delete" parameterType="java.lang.Integer" >
+        delete from users
+        where u_id = #{uId,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.cmpay.xgf.entity.UserDO" >
+        insert into users
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="uId != null" >
+                u_id,
+            </if>
+            <if test="userName != null" >
+                user_name,
+            </if>
+            <if test="password != null" >
+                password,
+            </if>
+            <if test="email != null" >
+                email,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="phone != null" >
+                phone,
+            </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+            <if test="createDate != null" >
+                create_date,
+            </if>
+            <if test="updateBy != null" >
+                update_by,
+            </if>
+            <if test="updateDate != null" >
+                update_date,
+            </if>
+            <if test="isUsed != null" >
+                is_used,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="uId != null" >
+                #{uId,jdbcType=INTEGER},
+            </if>
+            <if test="userName != null" >
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null" >
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                #{createDate,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null" >
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null" >
+                #{updateDate,jdbcType=VARCHAR},
+            </if>
+            <if test="isUsed != null" >
+                #{isUsed,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.cmpay.xgf.entity.UserDO" >
+        update users
+        <set >
+            <if test="userName != null" >
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                create_date = #{createDate,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null" >
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null" >
+                update_date = #{updateDate,jdbcType=VARCHAR},
+            </if>
+            <if test="isUsed != null" >
+                is_used = #{isUsed,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where u_id = #{uId,jdbcType=INTEGER}
+    </update>
+
+    <select id="find" resultMap="BaseResultMap" parameterType="com.cmpay.xgf.entity.UserDO" >
+        select 
+        <include refid="Base_Column_List" />
+        from users
+        <where >
+            <if test="uId != null" >
+                and u_id = #{uId,jdbcType=INTEGER}
+            </if>
+            <if test="userName != null" >
+                and user_name = #{userName,jdbcType=VARCHAR}
+            </if>
+            <if test="password != null" >
+                and password = #{password,jdbcType=VARCHAR}
+            </if>
+            <if test="email != null" >
+                and email = #{email,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null" >
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="phone != null" >
+                and phone = #{phone,jdbcType=VARCHAR}
+            </if>
+            <if test="createBy != null" >
+                and create_by = #{createBy,jdbcType=VARCHAR}
+            </if>
+            <if test="createDate != null" >
+                and create_date = #{createDate,jdbcType=VARCHAR}
+            </if>
+            <if test="updateBy != null" >
+                and update_by = #{updateBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updateDate != null" >
+                and update_date = #{updateDate,jdbcType=VARCHAR}
+            </if>
+            <if test="isUsed != null" >
+                and is_used = #{isUsed,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+</mapper>

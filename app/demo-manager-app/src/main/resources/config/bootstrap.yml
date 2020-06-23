@@ -84,19 +84,20 @@ lemon:
         cookiePath: /
       strategy: Header
       headerName: token
+
   security:
     principal:
       principalNameExpression: username
     #认证地址
     authentication:
-      loginPathPrefix: /v1/bui/login              #默认 /security/login
+      loginPathPrefix: /user/login              #默认 /security/login
       refreshPath: /v1/bui/refresh                #默认 /security/refresh
       logoutPath: /v1/bui/logout                  #默认 /security/logout
     authorizeRequests:
       #配置不进行认证检查的交易请求url
       permitAll:
         - /upms/v1/captcha/getCaptcha
-        - /user/info
+          /user/regist
   #Multiple dataSources
   dataSources:
     primary:
@@ -125,6 +126,7 @@ lemon:
     #每次从redis申请Id的数量
     delta:
       default: 500
+      USER_ID: 1000
       MSGID_: 1000
       REQUESTID_: 1000
       SYS:PUB:SEQ: 1000
@@ -132,6 +134,7 @@ lemon:
     max-value:
       #msgId key
       MSGID_: 999999999
+      USER_ID: 999999999
       REQUESTID_: 999999999
       SYS:PUB:SEQ: 999999999
   cache:
