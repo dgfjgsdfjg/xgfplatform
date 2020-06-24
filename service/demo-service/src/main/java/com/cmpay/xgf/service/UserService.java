@@ -13,12 +13,11 @@ import java.util.List;
 public interface UserService {
 
     /**
-     * 登录login
-     * @return int
+     * 注册
+     * @return
      * @param userDO
-     * 登录
      */
-    int regist(UserDO userDO);
+    void regist(UserDO userDO);
 
 
 //    /**
@@ -38,9 +37,9 @@ public interface UserService {
     /**
      * 描述
      * @param userDO
-     * @return int
+     * @return
      */
-    int delete(UserDO userDO);
+    void delete(UserDO userDO);
 
 
     /**

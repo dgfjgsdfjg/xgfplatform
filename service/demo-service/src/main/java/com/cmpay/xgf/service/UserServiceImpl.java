@@ -1,9 +1,12 @@
 package com.cmpay.xgf.service;
 
+import com.cmpay.lemon.common.exception.BusinessException;
 import com.cmpay.xgf.dao.IUserDao;
 import com.cmpay.xgf.entity.UserDO;
+import com.cmpay.xgf.enums.MsgEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,9 +20,13 @@ public class UserServiceImpl implements UserService{
     IUserDao userDao;
 
     @Override
-    public int regist(UserDO userDO) {
+    public void regist(UserDO userDO) {
 
-        return userDao.insert(userDO);
+        int res =  userDao.insert(userDO);
+
+        if (res != 1) {
+            BusinessException.throwBusinessException(MsgEnum.DB_INSERT_FAILED);
+        }
 
     }
 
@@ -30,9 +37,13 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public int delete(UserDO userDO) {
+    public void delete(UserDO userDO) {
 
-        return userDao.update(userDO);
+        int res = userDao.update(userDO);
+
+        if (res != 1) {
+            BusinessException.throwBusinessException(MsgEnum.DB_UPDATE_FAILED);
+        }
     }
 
     @Override

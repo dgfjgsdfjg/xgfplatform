@@ -197,4 +197,12 @@
             </if>
         </where>
     </select>
+    <select id="login" resultMap="BaseResultMap" parameterType="com.cmpay.xgf.bo.UserLoginBO">
+        select
+        <include refid="Base_Column_List" />
+        from users where
+        user_name = #{userName,jdbcType=VARCHAR}
+        and password = #{password,jdbcType=VARCHAR}
+        and is_used = 1
+    </select>
 </mapper>

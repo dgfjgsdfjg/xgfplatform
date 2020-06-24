@@ -3,6 +3,7 @@ package com.cmpay.xgf.controller;
 
 import com.cmpay.lemon.framework.utils.IdGenUtils;
 import com.cmpay.lemon.framework.utils.PageUtils;
+import com.cmpay.xgf.dto.UserDTO;
 import com.cmpay.xgf.service.LoginService;
 import com.cmpay.xgf.service.UserService;
 import com.cmpay.xgf.entity.UserDO;
@@ -48,10 +49,11 @@ public class UserController {
         return userDO;
 
     }
+    
 
     @PutMapping("/delete")
     @ResponseBody
-    public int delete() {
+    public void delete() {
 
         UserDO userDO = new UserDO();
 
@@ -63,10 +65,11 @@ public class UserController {
 
         userDO.setUpdateDate(LocalDateTime.now().toString());
 
-        return userService.delete(userDO);
+        userService.delete(userDO);
 
     }
 
+    //查询用户
     @GetMapping("/list")
     @ResponseBody
     public List<UserDO> findUsers() {
@@ -79,7 +82,7 @@ public class UserController {
 
     }
 
-    //分页查询
+    //分页查询用户
     @GetMapping("/plist")
     @ResponseBody
     public List<UserDO> pageFindUsers() {

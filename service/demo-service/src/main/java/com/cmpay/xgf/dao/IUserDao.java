@@ -7,7 +7,8 @@
 package com.cmpay.xgf.dao;
 
 import com.cmpay.lemon.framework.dao.BaseDao;
-import com.cmpay.lemon.framework.page.PageInfo;
+import com.cmpay.xgf.bo.UserLoginBO;
+import com.cmpay.xgf.dto.UserDTO;
 import com.cmpay.xgf.entity.UserDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -29,4 +30,6 @@ public interface IUserDao extends BaseDao<UserDO, Integer> {
 
     @Override
     List<UserDO> find(UserDO entity);
+
+    UserDO login(UserLoginBO entity);
 }

@@ -9,6 +9,7 @@ import com.cmpay.xgf.dto.UserDTO;
 import com.cmpay.xgf.entity.UserDO;
 import com.cmpay.xgf.enums.MsgEnum;
 import com.cmpay.xgf.service.LoginService;
+import com.cmpay.xgf.utils.Md5;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ public class LoginAuthenticationProcessor  extends AbstractGenericMatchableAuthe
     protected UserInfoBase doProcessAuthentication(GenericAuthenticationToken genericAuthenticationToken) throws AuthenticationException {
         HttpServletRequest request = genericAuthenticationToken.getAuthenticationRequest().getHttpServletRequest();
         UserDTO userInfoDTO = bindLoginData(request);
+        userInfoDTO.setPassword(Md5.md5(userInfoDTO.getPassword()));
         UserDO login = loginService.login(userInfoDTO);
         return new SimpleUserInfo(String.valueOf(login.getuId()),login.getUserName(),login.getPhone());
     }

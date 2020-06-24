@@ -99,7 +99,7 @@ lemon:
         - /upms/v1/captcha/getCaptcha
         - /user/reg
         - /user/delete
-        - /user/list
+
         - /user/plist
   #Multiple dataSources
   dataSources:
