@@ -10,7 +10,7 @@
         <result column="create_date" property="createDate" jdbcType="VARCHAR" />
         <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
         <result column="update_date" property="updateDate" jdbcType="VARCHAR" />
-        <result column="is_used" property="isUsed" jdbcType="VARCHAR" />
+        <result column="is_used" property="isUsed" jdbcType="INTEGER" />
     </resultMap>
 
     <sql id="Base_Column_List" >
@@ -80,7 +80,7 @@
                 #{updateDate,jdbcType=VARCHAR},
             </if>
             <if test="isUsed != null" >
-                #{isUsed,jdbcType=VARCHAR},
+                #{isUsed,jdbcType=INTEGER},
             </if>
         </trim>
     </insert>
@@ -107,7 +107,7 @@
                 update_date = #{updateDate,jdbcType=VARCHAR},
             </if>
             <if test="isUsed != null" >
-                is_used = #{isUsed,jdbcType=VARCHAR},
+                is_used = #{isUsed,jdbcType=INTEGER},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -140,7 +140,7 @@
                 and update_date = #{updateDate,jdbcType=VARCHAR}
             </if>
             <if test="isUsed != null" >
-                and is_used = #{isUsed,jdbcType=VARCHAR}
+                and is_used = #{isUsed,jdbcType=INTEGER}
             </if>
         </where>
     </select>

@@ -46,10 +46,14 @@ public class UserController {
 
         userService.regist(userDO);
 
+        int userRoleId = Integer.valueOf(IdGenUtils.generateId("XGF_ID"));
+
+        userService.insertRole(userDO.getuId(),userRoleId);
+
         return userDO;
 
     }
-    
+
 
     @PutMapping("/delete")
     @ResponseBody

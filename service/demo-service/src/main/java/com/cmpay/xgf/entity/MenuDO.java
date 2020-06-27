@@ -2,7 +2,7 @@
  * @ClassName MenuDO
  * @Description 
  * @version 1.0
- * @Date 2020-06-23 18:00:19
+ * @Date 2020-06-28 00:02:47
  */
 package com.cmpay.xgf.entity;
 
@@ -26,6 +26,26 @@ public class MenuDO extends BaseDO {
      * @Fields operate 
      */
     private String operate;
+    /**
+     * @Fields createBy 
+     */
+    private String createBy;
+    /**
+     * @Fields createDate 
+     */
+    private String createDate;
+    /**
+     * @Fields updateBy 
+     */
+    private String updateBy;
+    /**
+     * @Fields updateDate 
+     */
+    private String updateDate;
+    /**
+     * @Fields isUsed 
+     */
+    private Integer isUsed;
 
     public Integer getMenuId() {
         return menuId;
@@ -57,5 +77,45 @@ public class MenuDO extends BaseDO {
 
     public void setOperate(String operate) {
         this.operate = operate;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public String getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(String updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public Integer getIsUsed() {
+        return isUsed;
+    }
+
+    public void setIsUsed(Integer isUsed) {
+        this.isUsed = isUsed;
     }
 }

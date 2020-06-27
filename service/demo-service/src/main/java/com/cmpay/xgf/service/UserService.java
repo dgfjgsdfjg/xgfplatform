@@ -48,4 +48,13 @@ public interface UserService {
      * @return List<UserDO>
      */
     List<UserDO> pageFindUsers(UserDO userDO);
+
+    /**
+     *描述
+     * @param uId
+     * @param userRoleId
+     * @return List<UserDO>
+     */
+    void insertRole(int uId,int userRoleId);
+
 }

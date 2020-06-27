@@ -7,10 +7,16 @@
         <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
         <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
         <result column="operate" property="operate" jdbcType="VARCHAR" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="VARCHAR" />
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+        <result column="update_date" property="updateDate" jdbcType="VARCHAR" />
+        <result column="is_used" property="isUsed" jdbcType="INTEGER" />
     </resultMap>
 
     <sql id="Base_Column_List" >
-        menu_id, menu_name, parent_id, operate
+        menu_id, menu_name, parent_id, operate, create_by, create_date, update_by, update_date, 
+        is_used
     </sql>
 
     <select id="get" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -40,6 +46,21 @@
             <if test="operate != null" >
                 operate,
             </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+            <if test="createDate != null" >
+                create_date,
+            </if>
+            <if test="updateBy != null" >
+                update_by,
+            </if>
+            <if test="updateDate != null" >
+                update_date,
+            </if>
+            <if test="isUsed != null" >
+                is_used,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="menuId != null" >
@@ -53,6 +74,21 @@
             </if>
             <if test="operate != null" >
                 #{operate,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null" >
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                #{createDate,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null" >
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null" >
+                #{updateDate,jdbcType=VARCHAR},
+            </if>
+            <if test="isUsed != null" >
+                #{isUsed,jdbcType=INTEGER},
             </if>
         </trim>
     </insert>
@@ -68,6 +104,21 @@
             </if>
             <if test="operate != null" >
                 operate = #{operate,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                create_date = #{createDate,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null" >
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null" >
+                update_date = #{updateDate,jdbcType=VARCHAR},
+            </if>
+            <if test="isUsed != null" >
+                is_used = #{isUsed,jdbcType=INTEGER},
             </if>
         </set>
         where menu_id = #{menuId,jdbcType=INTEGER}
@@ -89,6 +140,21 @@
             </if>
             <if test="operate != null" >
                 and operate = #{operate,jdbcType=VARCHAR}
+            </if>
+            <if test="createBy != null" >
+                and create_by = #{createBy,jdbcType=VARCHAR}
+            </if>
+            <if test="createDate != null" >
+                and create_date = #{createDate,jdbcType=VARCHAR}
+            </if>
+            <if test="updateBy != null" >
+                and update_by = #{updateBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updateDate != null" >
+                and update_date = #{updateDate,jdbcType=VARCHAR}
+            </if>
+            <if test="isUsed != null" >
+                and is_used = #{isUsed,jdbcType=INTEGER}
             </if>
         </where>
     </select>

@@ -2,7 +2,7 @@
  * @ClassName UserRoleDO
  * @Description 
  * @version 1.0
- * @Date 2020-06-23 18:00:19
+ * @Date 2020-06-28 00:02:47
  */
 package com.cmpay.xgf.entity;
 
@@ -41,7 +41,7 @@ public class UserRoleDO extends BaseDO {
     /**
      * @Fields isUsed 
      */
-    private String isUsed;
+    private Integer isUsed;
 
     public Integer getId() {
         return id;
@@ -99,11 +99,11 @@ public class UserRoleDO extends BaseDO {
         this.updateDate = updateDate;
     }
 
-    public String getIsUsed() {
+    public Integer getIsUsed() {
         return isUsed;
     }
 
-    public void setIsUsed(String isUsed) {
+    public void setIsUsed(Integer isUsed) {
         this.isUsed = isUsed;
     }
 }

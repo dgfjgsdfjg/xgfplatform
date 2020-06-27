@@ -2,7 +2,7 @@
  * @ClassName UserDO
  * @Description 
  * @version 1.0
- * @Date 2020-06-23 18:00:19
+ * @Date 2020-06-28 00:02:47
  */
 package com.cmpay.xgf.entity;
 
