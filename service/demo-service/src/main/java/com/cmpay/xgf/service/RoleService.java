@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
  *
  * @author xgf
  */
-@Service
 public interface RoleService {
 
     /**

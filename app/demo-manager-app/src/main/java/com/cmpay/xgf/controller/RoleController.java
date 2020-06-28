@@ -23,8 +23,6 @@ public class RoleController {
 
         roleDO.setRoleId(Integer.valueOf(IdGenUtils.generateId("XGF_ID")));
 
-        roleDO.setRoleName(roleDO.getRoleName());
-
         roleDO.setCreateBy("xgf");
 
         roleDO.setCreateDate(LocalDateTime.now().toString());
@@ -42,11 +40,7 @@ public class RoleController {
 
     @PutMapping("/delete")
     @ResponseBody
-    public void delete() {
-
-        RoleDO roleDO = new RoleDO();
-
-        roleDO.setRoleId(1);
+    public void delete(@RequestBody RoleDO roleDO) {
 
         roleDO.setIsUsed(0);
 

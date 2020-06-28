@@ -13,29 +13,22 @@ import java.util.List;
 public interface UserService {
 
     /**
-     * 注册
+     * 用户注册
      * @return
      * @param userDO
      */
     void regist(UserDO userDO);
 
 
-//    /**
-//     * 查询用户列表
-//     * @param userInfoQueryBO
-//     * @return
-//     */
-//    PageInfo<UserDO> findUsers(UserInfoQueryBO userInfoQueryBO);
-
     /**
-     * 描述
+     * 查询用户列表
      * @param userDO
      * @return List<UserDO>
      */
     List<UserDO> findUsers(UserDO  userDO);
 
     /**
-     * 描述
+     * 删除用户(状态为不可用)
      * @param userDO
      * @return
      */
@@ -43,14 +36,14 @@ public interface UserService {
 
 
     /**
-     *描述
+     *分页查询用户
      * @param userDO
      * @return List<UserDO>
      */
     List<UserDO> pageFindUsers(UserDO userDO);
 
     /**
-     *描述
+     *为用户新增角色
      * @param uId
      * @param userRoleId
      * @param roleId

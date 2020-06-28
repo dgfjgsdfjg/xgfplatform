@@ -19,6 +19,7 @@ import java.util.List;
  * @author xgf
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class UserServiceImpl implements UserService{
 
     @Autowired

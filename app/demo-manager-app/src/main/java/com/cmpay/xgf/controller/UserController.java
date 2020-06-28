@@ -63,11 +63,7 @@ public class UserController {
 
     @PutMapping("/delete")
     @ResponseBody
-    public void delete() {
-
-        UserDO userDO = new UserDO();
-
-        userDO.setuId(2);
+    public void delete(@RequestBody UserDO userDO) {
 
         userDO.setIsUsed(0);
 
