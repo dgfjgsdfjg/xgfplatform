@@ -1,4 +1,5 @@
 package com.cmpay.xgf.controller;
+import com.cmpay.lemon.framework.utils.IdGenUtils;
 import com.cmpay.xgf.entity.RoleDO;
 import com.cmpay.xgf.entity.UserDO;
 import com.cmpay.xgf.service.RoleService;
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
 
 
 @RestController
-@RequestMapping("/Role")
+@RequestMapping("/role")
 public class RoleController {
 
     @Autowired
@@ -18,11 +19,26 @@ public class RoleController {
 
     @PostMapping("/createRole")
     @ResponseBody
-    public void createRole(RoleDO roleDO) {
+    public void createRole(@RequestBody RoleDO roleDO) {
+
+        roleDO.setRoleId(Integer.valueOf(IdGenUtils.generateId("XGF_ID")));
+
+        roleDO.setRoleName(roleDO.getRoleName());
+
+        roleDO.setCreateBy("xgf");
+
+        roleDO.setCreateDate(LocalDateTime.now().toString());
+
+        roleDO.setUpdateBy("xgf");
+
+        roleDO.setUpdateDate(LocalDateTime.now().toString());
+
+        roleDO.setIsUsed(1);
 
         roleService.createRole(roleDO);
 
     }
+
 
     @PutMapping("/delete")
     @ResponseBody

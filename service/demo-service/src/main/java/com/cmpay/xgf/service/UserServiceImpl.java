@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void insertRole(int uId, int userRoleId) {
+    public void insertRole(int uId, int userRoleId,int roleId) {
 
         List<UserRoleDO> userRoleDOList = new LinkedList<UserRoleDO>();
 
@@ -73,12 +73,13 @@ public class UserServiceImpl implements UserService{
 
         userRoleDO.setuId(uId);
 
-        userRoleDO.setRoleId(1);
+        userRoleDO.setRoleId(roleId);
 
         userRoleDO.setCreateBy("xgf");
         userRoleDO.setCreateDate(LocalDateTime.now().toString());
         userRoleDO.setUpdateBy("xgf");
         userRoleDO.setUpdateDate(LocalDateTime.now().toString());
+        userRoleDO.setIsUsed(1);
 
         userRoleDOList.add(userRoleDO);
 

@@ -39,6 +39,10 @@ public class UserDO extends BaseDO {
      */
     private String phone;
     /**
+     * @Fields roleName 角色名
+     */
+    private String roleName;
+    /**
      * @Fields createBy 创建者
      */
     private String createBy;
@@ -113,6 +117,14 @@ public class UserDO extends BaseDO {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     public String getCreateBy() {

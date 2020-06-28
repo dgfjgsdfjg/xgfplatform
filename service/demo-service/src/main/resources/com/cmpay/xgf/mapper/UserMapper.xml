@@ -10,6 +10,7 @@
         <result column="email" property="email" jdbcType="VARCHAR" />
         <result column="status" property="status" jdbcType="INTEGER" />
         <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="role_name" property="roleName" jdbcType="VARCHAR" />
         <result column="create_by" property="createBy" jdbcType="VARCHAR" />
         <result column="create_date" property="createDate" jdbcType="VARCHAR" />
         <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
@@ -197,4 +198,14 @@
             </if>
         </where>
     </select>
+
+    <select id="login" resultMap="BaseResultMap" parameterType="com.cmpay.xgf.bo.UserLoginBO">
+        select
+        <include refid="Base_Column_List" />
+        from users where
+        user_name = #{userName,jdbcType=VARCHAR}
+        and password = #{password,jdbcType=VARCHAR}
+        and is_used = 1
+    </select>
+
 </mapper>

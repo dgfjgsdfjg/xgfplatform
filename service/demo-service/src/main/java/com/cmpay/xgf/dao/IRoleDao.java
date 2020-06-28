@@ -14,4 +14,6 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface IRoleDao extends BaseDao<RoleDO, Integer> {
+
+    RoleDO selectRoleByRoleName(String roleName);
 }

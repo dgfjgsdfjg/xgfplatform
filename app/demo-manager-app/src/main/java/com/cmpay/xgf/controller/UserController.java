@@ -4,7 +4,9 @@ package com.cmpay.xgf.controller;
 import com.cmpay.lemon.framework.utils.IdGenUtils;
 import com.cmpay.lemon.framework.utils.PageUtils;
 import com.cmpay.xgf.dto.UserDTO;
+import com.cmpay.xgf.entity.RoleDO;
 import com.cmpay.xgf.service.LoginService;
+import com.cmpay.xgf.service.RoleService;
 import com.cmpay.xgf.service.UserService;
 import com.cmpay.xgf.entity.UserDO;
 import com.cmpay.xgf.utils.Md5;
@@ -25,6 +27,8 @@ public class UserController {
     UserService userService;
     @Autowired
     LoginService loginService;
+    @Autowired
+    RoleService roleService;
 
     @PostMapping("/reg")
     @ResponseBody
@@ -48,7 +52,9 @@ public class UserController {
 
         int userRoleId = Integer.valueOf(IdGenUtils.generateId("XGF_ID"));
 
-        userService.insertRole(userDO.getuId(),userRoleId);
+        RoleDO roleDO = roleService.selectRoleByRoleName(userDO.getRoleName());
+
+        userService.insertRole(userDO.getuId(),userRoleId,roleDO.getRoleId());
 
         return userDO;
 

@@ -29,6 +29,13 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    public RoleDO selectRoleByRoleName(String roleName) {
+
+        return roleDao.selectRoleByRoleName(roleName);
+
+    }
+
+    @Override
     public void delete(RoleDO roleDO) {
 
         int res = roleDao.update(roleDO);

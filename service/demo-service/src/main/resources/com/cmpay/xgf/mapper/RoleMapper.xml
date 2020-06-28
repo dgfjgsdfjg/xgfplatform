@@ -12,6 +12,10 @@
         <result column="is_used" property="isUsed" jdbcType="INTEGER" />
     </resultMap>
 
+    <resultMap id="IntResultMap" type="java.lang.Integer" >
+        <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    </resultMap>
+
     <sql id="Base_Column_List" >
         role_id, role_name, create_by, create_date, update_by, update_date, is_used
     </sql>
@@ -130,5 +134,12 @@
                 and is_used = #{isUsed,jdbcType=INTEGER}
             </if>
         </where>
+    </select>
+
+    <select id="selectRoleByRoleName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List" />
+        from role
+        where role_name = #{roleName}
     </select>
 </mapper>

@@ -10,7 +10,7 @@
         <result column="create_date" property="createDate" jdbcType="VARCHAR" />
         <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
         <result column="update_date" property="updateDate" jdbcType="VARCHAR" />
-        <result column="is_used" property="isUsed" jdbcType="INTEGER" />
+        <result column="is_used" property="isUsed" jdbcType="VARCHAR" />
     </resultMap>
 
     <sql id="Base_Column_List" >
@@ -18,7 +18,7 @@
     </sql>
 
     <select id="get" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-        select 
+        select
         <include refid="Base_Column_List" />
         from user_role
         where id = #{id,jdbcType=INTEGER}
@@ -80,7 +80,7 @@
                 #{updateDate,jdbcType=VARCHAR},
             </if>
             <if test="isUsed != null" >
-                #{isUsed,jdbcType=INTEGER},
+                #{isUsed,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -107,14 +107,14 @@
                 update_date = #{updateDate,jdbcType=VARCHAR},
             </if>
             <if test="isUsed != null" >
-                is_used = #{isUsed,jdbcType=INTEGER},
+                is_used = #{isUsed,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
 
     <select id="find" resultMap="BaseResultMap" parameterType="com.cmpay.xgf.entity.UserRoleDO" >
-        select 
+        select
         <include refid="Base_Column_List" />
         from user_role
         <where >
@@ -140,8 +140,17 @@
                 and update_date = #{updateDate,jdbcType=VARCHAR}
             </if>
             <if test="isUsed != null" >
-                and is_used = #{isUsed,jdbcType=INTEGER}
+                and is_used = #{isUsed,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
+
+    <insert id="insertRole" parameterType="list">
+        insert into user_role(<include refid="Base_Column_List" />)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id},#{item.uId},#{item.roleId},#{item.createBy},#{item.createDate},#{item.updateBy},#{item.updateDate},#{item.isUsed})
+        </foreach>
+    </insert>
+
 </mapper>

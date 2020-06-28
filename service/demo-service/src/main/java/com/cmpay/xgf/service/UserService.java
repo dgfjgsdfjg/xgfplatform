@@ -53,8 +53,9 @@ public interface UserService {
      *描述
      * @param uId
      * @param userRoleId
+     * @param roleId
      * @return List<UserDO>
      */
-    void insertRole(int uId,int userRoleId);
+    void insertRole(int uId,int userRoleId,int roleId);
 
 }
