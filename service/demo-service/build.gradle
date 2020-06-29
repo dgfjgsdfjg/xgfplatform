@@ -4,7 +4,8 @@ dependencies {
     compile project(':interface:demo-manager-interface')
     compile project(':constant:demo-constant')
     compile("org.projectlombok:lombok")
-
+    // 验证码
+    compile("com.github.axet:kaptcha:0.0.9")
 
 
 }
