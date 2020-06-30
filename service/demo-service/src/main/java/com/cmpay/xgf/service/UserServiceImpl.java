@@ -93,6 +93,22 @@ public class UserServiceImpl implements UserService{
 
     }
 
+    @Override
+    public UserDO get(int uId) {
+
+        return userDao.get(uId);
+    }
+
+    @Override
+    public void update(UserDO userDO) {
+
+        int res = userDao.update(userDO);
+
+        if (res != 1) {
+            BusinessException.throwBusinessException(MsgEnum.DB_UPDATE_FAILED);
+        }
+    }
+
 
 //    /**
 //     * 分页查询

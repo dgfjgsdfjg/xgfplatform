@@ -4,6 +4,8 @@ import com.cmpay.xgf.entity.RoleDO;
 import com.cmpay.xgf.entity.UserDO;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 /**
  *
@@ -33,4 +35,18 @@ public interface RoleService {
      * 描述
      */
     void delete(RoleDO roleDO);
+
+    /**
+     * 查询所有角色
+     * @param roleDO
+     * @return List<RoleDO>
+     */
+    List<RoleDO> find(RoleDO roleDO);
+
+    /**
+     * 根据用户Id查询角色
+     * @param roleId
+     * @return UserDO
+     */
+    RoleDO get(int roleId);
 }

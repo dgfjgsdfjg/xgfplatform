@@ -8,6 +8,8 @@ import com.cmpay.xgf.enums.MsgEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author xgf
  */
@@ -45,5 +47,17 @@ public class RoleServiceImpl implements RoleService {
         }
 
 
+    }
+
+    @Override
+    public List<RoleDO> find(RoleDO roleDO) {
+
+        return roleDao.find(roleDO);
+    }
+
+    @Override
+    public RoleDO get(int roleId) {
+
+        return roleDao.get(roleId);
     }
 }

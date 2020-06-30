@@ -5,7 +5,7 @@
     <resultMap id="BaseResultMap" type="com.cmpay.xgf.entity.UserDO" >
         <id column="u_id" property="uId" jdbcType="INTEGER" />
         <result column="name" property="name" jdbcType="VARCHAR" />
-        <result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="user_name" property="username" jdbcType="VARCHAR" />
         <result column="password" property="password" jdbcType="VARCHAR" />
         <result column="email" property="email" jdbcType="VARCHAR" />
         <result column="status" property="status" jdbcType="INTEGER" />
@@ -44,7 +44,7 @@
             <if test="name != null" >
                 name,
             </if>
-            <if test="userName != null" >
+            <if test="username != null" >
                 user_name,
             </if>
             <if test="password != null" >
@@ -82,8 +82,8 @@
             <if test="name != null" >
                 #{name,jdbcType=VARCHAR},
             </if>
-            <if test="userName != null" >
-                #{userName,jdbcType=VARCHAR},
+            <if test="username != null" >
+                #{username,jdbcType=VARCHAR},
             </if>
             <if test="password != null" >
                 #{password,jdbcType=VARCHAR},
@@ -121,8 +121,8 @@
             <if test="name != null" >
                 name = #{name,jdbcType=VARCHAR},
             </if>
-            <if test="userName != null" >
-                user_name = #{userName,jdbcType=VARCHAR},
+            <if test="username != null" >
+                user_name = #{username,jdbcType=VARCHAR},
             </if>
             <if test="password != null" >
                 password = #{password,jdbcType=VARCHAR},
@@ -166,8 +166,8 @@
             <if test="name != null" >
                 and name = #{name,jdbcType=VARCHAR}
             </if>
-            <if test="userName != null" >
-                and user_name = #{userName,jdbcType=VARCHAR}
+            <if test="username != null" >
+                and user_name = #{username,jdbcType=VARCHAR}
             </if>
             <if test="password != null" >
                 and password = #{password,jdbcType=VARCHAR}
@@ -203,7 +203,7 @@
         select
         <include refid="Base_Column_List" />
         from users where
-        user_name = #{userName,jdbcType=VARCHAR}
+        user_name = #{username,jdbcType=VARCHAR}
         and password = #{password,jdbcType=VARCHAR}
         and is_used = 1
     </select>

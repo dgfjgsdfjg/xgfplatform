@@ -51,4 +51,18 @@ public interface UserService {
      */
     void insertRole(int uId,int userRoleId,int roleId);
 
+    /**
+     * 根据用户Id查询用户
+     * @param uId
+     * @return UserDO
+     */
+    UserDO get(int uId);
+
+    /**
+     * 更新用户
+     * @param userDO
+     * @return
+     */
+    void update(UserDO userDO);
+
 }

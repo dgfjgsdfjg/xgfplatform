@@ -4,23 +4,5 @@
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="untitled.app.demo-manager-app.main" target="1.8" />
-      <module name="untitled.app.demo-manager-app.test" target="1.8" />
-      <module name="untitled.app.main" target="1.8" />
-      <module name="untitled.app.test" target="1.8" />
-      <module name="untitled.common.main" target="1.8" />
-      <module name="untitled.common.test" target="1.8" />
-      <module name="untitled.constant.main" target="1.8" />
-      <module name="untitled.constant.test" target="1.8" />
-      <module name="untitled.interface.main" target="1.8" />
-      <module name="untitled.interface.test" target="1.8" />
-      <module name="untitled.main" target="1.8" />
-      <module name="untitled.service.main" target="1.8" />
-      <module name="untitled.service.test" target="1.8" />
-      <module name="untitled.test" target="1.8" />
-      <module name="xgfplatform.main" target="1.8" />
-      <module name="xgfplatform.test" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

@@ -40,7 +40,7 @@ public class LoginAuthenticationProcessor  extends AbstractGenericMatchableAuthe
         UserDTO userInfoDTO = bindLoginData(request);
         userInfoDTO.setPassword(Md5.md5(userInfoDTO.getPassword()));
         UserDO login = loginService.login(userInfoDTO);
-        return new SimpleUserInfo(String.valueOf(login.getuId()),login.getUserName(),login.getPhone());
+        return new SimpleUserInfo(String.valueOf(login.getuId()),login.getUsername(),login.getPhone());
     }
 
 
