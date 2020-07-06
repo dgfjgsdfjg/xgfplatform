@@ -28,6 +28,10 @@ public class UserInfoDTO {
          */
         private String phone;
         /**
+         * @Fields roleId 角色Id
+         */
+        private Integer roleId;
+        /**
          * @Fields createDate 创建日期
          */
         private String createDate;
@@ -80,6 +84,13 @@ public class UserInfoDTO {
                 this.phone = phone;
         }
 
+        public Integer getRoleId() {
+                return roleId;
+        }
+
+        public void setRoleId(Integer roleId) {
+                this.roleId = roleId;
+        }
 
         public String getCreateDate() {
                 return createDate;

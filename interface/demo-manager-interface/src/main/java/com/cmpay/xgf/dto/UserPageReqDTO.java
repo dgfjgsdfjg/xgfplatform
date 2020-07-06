@@ -8,7 +8,13 @@ import java.util.List;
 @Data
 public class UserPageReqDTO extends PageableRspDTO {
 
-    private UserInfoDTO user;
+    private List<Integer> Ids;
 
-    private List<Integer> usersIds;
+    public List<Integer> getIds() {
+        return Ids;
+    }
+
+    public void setIds(List<Integer> ids) {
+        Ids = ids;
+    }
 }

@@ -88,9 +88,29 @@ public class UserServiceImpl implements UserService{
         int res = userRoleDao.insertRole(userRoleDOList);
 
         if (res != 1) {
-            BusinessException.throwBusinessException(MsgEnum.DB_UPDATE_FAILED);
+            BusinessException.throwBusinessException(MsgEnum.DB_INSERT_FAILED);
         }
 
+    }
+
+    @Override
+    public void updateRole(int uId,int roleId) {
+
+        UserRoleDO userRoleDO = new UserRoleDO();
+
+        userRoleDO.setuId(uId);
+
+        userRoleDO.setRoleId(roleId);
+
+        userRoleDO.setUpdateBy("xgf");
+        userRoleDO.setUpdateDate(LocalDateTime.now().toString());
+        userRoleDO.setIsUsed(1);
+
+        int res = userRoleDao.update(userRoleDO);
+
+        if (res != 1) {
+            BusinessException.throwBusinessException(MsgEnum.DB_UPDATE_FAILED);
+        }
     }
 
     @Override

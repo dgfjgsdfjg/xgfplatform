@@ -1,49 +1,40 @@
-/*
- * @ClassName MenuDO
- * @Description 
- * @version 1.0
- * @Date 2020-06-28 00:02:47
- */
-package com.cmpay.xgf.entity;
+package com.cmpay.xgf.dto;
 
-import com.cmpay.lemon.framework.annotation.DataObject;
-
-@DataObject
-public class MenuDO extends BaseDO {
+public class MenuInfoDTO {
     /**
-     * @Fields menuId 
+     * @Fields menuId
      */
     private Integer menuId;
     /**
-     * @Fields menuName 
+     * @Fields menuName
      */
     private String menuName;
     /**
-     * @Fields parentId 
+     * @Fields parentId
      */
     private Integer parentId;
     /**
-     * @Fields operate 
+     * @Fields operate
      */
     private String operate;
     /**
-     * @Fields createBy 
+     * @Fields createBy
      */
     private String createBy;
     /**
-     * @Fields createDate 
+     * @Fields createDate
      */
     private String createDate;
     /**
-     * @Fields updateBy 
+     * @Fields updateBy
      */
     private String updateBy;
     /**
-     * @Fields updateDate 
+     * @Fields updateDate
      */
     private String updateDate;
     /**
-     * @Fields isUsed 
+     * @Fields isUsed
      */
     private Integer isUsed;
     /**

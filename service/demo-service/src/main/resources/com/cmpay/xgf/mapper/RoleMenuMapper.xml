@@ -144,4 +144,12 @@
             </if>
         </where>
     </select>
+
+    <insert id="insertMenu" parameterType="list">
+        insert into role_menu(<include refid="Base_Column_List" />)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id},#{item.roleId},#{item.menuId},#{item.createBy},#{item.createDate},#{item.updateBy},#{item.updateDate},#{item.isUsed})
+        </foreach>
+    </insert>
 </mapper>

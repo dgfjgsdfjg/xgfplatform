@@ -11,6 +11,11 @@ public class RoleInfoDTO {
      */
     private String roleName;
 
+    /**
+     * @Fields createTime
+     */
+    private String createDate;
+
     public Integer getRoleId() {
         return roleId;
     }
@@ -25,5 +30,13 @@ public class RoleInfoDTO {
 
     public void setRoleName(String roleName) {
         this.roleName = roleName;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
     }
 }

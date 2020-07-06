@@ -8,6 +8,8 @@ package com.cmpay.xgf.dto;
 
 import com.cmpay.lemon.framework.annotation.DataObject;
 
+import java.util.List;
+
 /**
  * return UserDO
  */
@@ -41,6 +43,10 @@ public class UserRspDTO {
      * @Fields phone 用户电话号码
      */
     private String phone;
+    /**
+     *  @Fields ridList 角色id列表
+     */
+    private List<Integer> ridList;
     /**
      * @Fields createBy 创建者
      */
@@ -116,6 +122,14 @@ public class UserRspDTO {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public List<Integer> getRidList() {
+        return ridList;
+    }
+
+    public void setRidList(List<Integer> ridList) {
+        this.ridList = ridList;
     }
 
     public String getCreateBy() {

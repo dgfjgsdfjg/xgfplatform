@@ -6,6 +6,7 @@ import com.cmpay.framework.data.response.GenericRspDTO;
 import com.cmpay.lemon.common.utils.BeanUtils;
 import com.cmpay.lemon.common.utils.JudgeUtils;
 import com.cmpay.lemon.framework.annotation.QueryBody;
+import com.cmpay.lemon.framework.data.NoBody;
 import com.cmpay.lemon.framework.page.PageInfo;
 import com.cmpay.lemon.framework.security.SecurityUtils;
 import com.cmpay.lemon.framework.security.UserInfoBase;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -43,7 +45,7 @@ public class UserController {
 
     @PostMapping("/save")
     @ResponseBody
-    public GenericRspDTO<UserPageRspDTO> reg(@RequestBody UserDO userDO) {
+    public GenericRspDTO<NoBody> reg(@RequestBody UserDO userDO) {
 
         userDO.setuId(Integer.valueOf(IdGenUtils.generateId("XGF_ID")));
 
@@ -63,19 +65,17 @@ public class UserController {
 
         int userRoleId = Integer.valueOf(IdGenUtils.generateId("XGF_ID"));
 
-        RoleDO roleDO = roleService.selectRoleByRoleName(userDO.getRoleName());
 
-        userService.insertRole(userDO.getuId(),userRoleId,roleDO.getRoleId());
+        userService.insertRole(userDO.getuId(),userRoleId,userDO.getRoleId());
 
-        UserPageRspDTO userRspDTO = new UserPageRspDTO();
-
-        return GenericRspDTO.newInstance(MsgEnum.SUCCESS, userRspDTO);
+        return GenericRspDTO.newInstance(MsgEnum.SUCCESS);
 
     }
 
     @PostMapping("/update")
-    @ResponseBody
-    public GenericRspDTO<UserPageRspDTO> update(@RequestBody UserDO userDO) {
+    public GenericRspDTO<NoBody> update(@RequestBody UserDO userDO) {
+
+        userDO.setPassword(Md5.md5(userDO.getPassword()));
 
         userDO.setUpdateBy(SecurityUtils.getLoginName());
 
@@ -85,9 +85,10 @@ public class UserController {
 
         userService.update(userDO);
 
-        UserPageRspDTO userRspDTO = new UserPageRspDTO();
+        userService.updateRole(userDO.getuId(),userDO.getRoleId());
 
-        return GenericRspDTO.newInstance(MsgEnum.SUCCESS, userRspDTO);
+
+        return GenericRspDTO.newInstance(MsgEnum.SUCCESS);
 
     }
 
@@ -110,20 +111,32 @@ public class UserController {
 
 
     @PostMapping("/delete")
-    @ResponseBody
-    public GenericRspDTO<UserPageRspDTO> delete(@RequestBody UserDO userDO) {
+    public GenericRspDTO<NoBody> delete(@RequestBody UserReqDTO userReqDTO) {
 
-        userDO.setIsUsed(0);
+        List<Integer> uId = userReqDTO.getuId();
 
-        userDO.setUpdateBy(SecurityUtils.getLoginName());
+        List<UserDO> userDOS = new ArrayList<UserDO>();
 
-        userDO.setUpdateDate(LocalDateTime.now().toString());
+        for(int i = 0;i<uId.size();i++) {
 
-        userService.delete(userDO);
+            userDOS.add(i,new UserDO());
+        }
 
-        UserPageRspDTO userRspDTO = new UserPageRspDTO();
 
-        return GenericRspDTO.newInstance(MsgEnum.SUCCESS, userRspDTO);
+        for (UserDO userDO : userDOS) {
+
+            userDO.setIsUsed(0);
+
+            userDO.setuId(uId.get(userDOS.indexOf(userDO)));
+
+            userDO.setUpdateBy(SecurityUtils.getLoginName());
+
+            userDO.setUpdateDate(LocalDateTime.now().toString());
+
+            userService.delete(userDO);
+        }
+
+        return GenericRspDTO.newInstance(MsgEnum.SUCCESS);
 
     }
 

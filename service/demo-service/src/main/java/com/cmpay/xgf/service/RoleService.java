@@ -49,4 +49,12 @@ public interface RoleService {
      * @return UserDO
      */
     RoleDO get(int roleId);
+
+    /**
+     * 插入菜单
+     * @param roleId
+     * @param roleMenuIds
+     * @param menuIds
+     */
+    void insertMenu(int roleId, List<Integer> roleMenuIds,List<Integer> menuIds);
 }

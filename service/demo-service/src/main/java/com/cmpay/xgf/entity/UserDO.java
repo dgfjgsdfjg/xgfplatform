@@ -41,7 +41,7 @@ public class UserDO extends BaseDO {
     /**
      * @Fields roleName 角色名
      */
-    private String roleName;
+    private Integer roleId;
     /**
      * @Fields createBy 创建者
      */
@@ -119,12 +119,12 @@ public class UserDO extends BaseDO {
         this.phone = phone;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public Integer getRoleId() {
+        return roleId;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     public String getCreateBy() {

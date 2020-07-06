@@ -47,9 +47,18 @@ public interface UserService {
      * @param uId
      * @param userRoleId
      * @param roleId
-     * @return List<UserDO>
+     * @return
      */
     void insertRole(int uId,int userRoleId,int roleId);
+
+
+    /**
+     *为用户新增角色
+     * @param uId
+     * @param roleId
+     * @return
+     */
+    void updateRole(int uId,int roleId);
 
     /**
      * 根据用户Id查询用户

@@ -3,18 +3,22 @@ import com.cmpay.framework.data.request.GenericDTO;
 import com.cmpay.framework.data.response.GenericRspDTO;
 import com.cmpay.lemon.common.utils.BeanUtils;
 import com.cmpay.lemon.framework.annotation.QueryBody;
+import com.cmpay.lemon.framework.data.NoBody;
 import com.cmpay.lemon.framework.page.PageInfo;
 import com.cmpay.lemon.framework.security.SecurityUtils;
 import com.cmpay.lemon.framework.utils.IdGenUtils;
 import com.cmpay.xgf.dto.*;
 import com.cmpay.xgf.entity.RoleDO;
+import com.cmpay.xgf.entity.UserDO;
 import com.cmpay.xgf.enums.MsgEnum;
 import com.cmpay.xgf.service.RoleService;
+import com.cmpay.xgf.utils.Md5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,11 +31,15 @@ public class RoleController {
     RoleService roleService;
 
 
-    @PostMapping("/createRole")
+    @PostMapping("/save")
     @ResponseBody
-    public void createRole(@RequestBody RoleDO roleDO) {
+    public GenericRspDTO<NoBody> reg(@RequestBody RoleInfoReqDTO roleInfoReqDTO) {
+
+        RoleDO roleDO = new RoleDO();
 
         roleDO.setRoleId(Integer.valueOf(IdGenUtils.generateId("XGF_ID")));
+
+        roleDO.setRoleName(roleInfoReqDTO.getRoleName());
 
         roleDO.setCreateBy(SecurityUtils.getLoginName());
 
@@ -44,6 +52,19 @@ public class RoleController {
         roleDO.setIsUsed(1);
 
         roleService.createRole(roleDO);
+
+        List<Integer> roleMenuIds = new ArrayList<>();
+
+        for(int i = 0;i<roleInfoReqDTO.getMenuIds().size();i++) {
+
+            roleMenuIds.add(i,Integer.valueOf(IdGenUtils.generateId("XGF_ID")));
+        }
+
+        roleService.insertMenu(roleDO.getRoleId(),roleMenuIds,roleInfoReqDTO.getMenuIds());
+
+        //userService.insertRole(userDO.getuId(),userRoleId,userDO.getRoleId());
+
+        return GenericRspDTO.newInstance(MsgEnum.SUCCESS);
 
     }
 
@@ -79,17 +100,32 @@ public class RoleController {
     }
 
 
-    @PutMapping("/delete")
-    @ResponseBody
-    public void delete(@RequestBody RoleDO roleDO) {
+    @PostMapping("/delete")
+    public GenericRspDTO<NoBody> delete(@RequestBody RoleReqDTO roleReqDTO) {
 
-        roleDO.setIsUsed(0);
+        List<Integer> roleId = roleReqDTO.getRoleIds();
 
-        roleDO.setUpdateBy(SecurityUtils.getLoginName());
+        List<RoleDO> roleDOS = new ArrayList<RoleDO>();
 
-        roleDO.setUpdateDate(LocalDateTime.now().toString());
+        for(int i = 0;i<roleId.size();i++) {
 
-        roleService.delete(roleDO);
+            roleDOS.add(i,new RoleDO());
+        }
+
+        for (RoleDO roleDO : roleDOS) {
+
+            roleDO.setIsUsed(0);
+
+            roleDO.setRoleId(roleId.get(roleDOS.indexOf(roleDO)));
+
+            roleDO.setUpdateBy(SecurityUtils.getLoginName());
+
+            roleDO.setUpdateDate(LocalDateTime.now().toString());
+
+            roleService.delete(roleDO);
+        }
+
+        return GenericRspDTO.newInstance(MsgEnum.SUCCESS);
 
     }
 
