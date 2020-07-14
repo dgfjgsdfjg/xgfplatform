@@ -57,4 +57,25 @@ public interface MenuService {
      * @return
      */
     List<Map> buildMenu(List<MenuInfoDTO> menuList, Integer parentId);
+
+    /**
+     * 通过菜单类型得到菜单
+     * @param types
+     * @return List<MenuDO>
+     */
+    List<MenuDO> getMenusByTypes(List<Integer> types);
+
+    /**
+     * 插入菜单
+     * @param menuDO
+     * @return int
+     */
+    void insert(MenuDO menuDO);
+
+    /**
+     * 通过菜单
+     * @param operate
+     * @return MenuDO
+     */
+    MenuDO getByOperate(String operate);
 }

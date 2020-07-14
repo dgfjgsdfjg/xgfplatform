@@ -27,6 +27,13 @@
         where menu_id = #{menuId,jdbcType=INTEGER}
     </select>
 
+    <select id="getByOperate" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from menu
+        where operate = #{operate,jdbcType=VARCHAR}
+    </select>
+
     <delete id="delete" parameterType="java.lang.Integer" >
         delete from menu
         where menu_id = #{menuId,jdbcType=INTEGER}
@@ -170,5 +177,15 @@
                 and type = #{type,jdbcType=INTEGER}
             </if>
         </where>
+    </select>
+
+    <select id="getMenusByTypes" resultMap="BaseResultMap" parameterType="list" >
+        select
+        <include refid="Base_Column_List" />
+        from menu
+        where type in
+        <foreach collection="list" item="type" index="index" open="(" close=")" separator=",">
+            #{type}
+        </foreach>
     </select>
 </mapper>

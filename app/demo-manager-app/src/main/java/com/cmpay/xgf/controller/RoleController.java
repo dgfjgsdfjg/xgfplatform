@@ -8,11 +8,13 @@ import com.cmpay.lemon.framework.page.PageInfo;
 import com.cmpay.lemon.framework.security.SecurityUtils;
 import com.cmpay.lemon.framework.utils.IdGenUtils;
 import com.cmpay.xgf.dto.*;
+import com.cmpay.xgf.entity.MenuDO;
 import com.cmpay.xgf.entity.RoleDO;
+import com.cmpay.xgf.entity.RoleMenuDO;
 import com.cmpay.xgf.entity.UserDO;
 import com.cmpay.xgf.enums.MsgEnum;
+import com.cmpay.xgf.service.MenuService;
 import com.cmpay.xgf.service.RoleService;
-import com.cmpay.xgf.utils.Md5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,10 +32,12 @@ public class RoleController {
     @Autowired
     RoleService roleService;
 
+    @Autowired
+    MenuService menuService;
 
     @PostMapping("/save")
     @ResponseBody
-    public GenericRspDTO<NoBody> reg(@RequestBody RoleInfoReqDTO roleInfoReqDTO) {
+    public GenericRspDTO<NoBody> saveRole(@RequestBody RoleInfoReqDTO roleInfoReqDTO) {
 
         RoleDO roleDO = new RoleDO();
 
@@ -62,11 +66,57 @@ public class RoleController {
 
         roleService.insertMenu(roleDO.getRoleId(),roleMenuIds,roleInfoReqDTO.getMenuIds());
 
-        //userService.insertRole(userDO.getuId(),userRoleId,userDO.getRoleId());
+        return GenericRspDTO.newSuccessInstance();
+
+    }
+
+    @PostMapping("/update")
+    public GenericRspDTO<NoBody> update(@RequestBody RoleInfoReqDTO roleInfoReqDTO) {
+
+        RoleDO roleDO = new RoleDO();
+
+        roleDO.setRoleId(roleInfoReqDTO.getRoleId());
+
+        roleDO.setRoleName(roleInfoReqDTO.getRoleName());
+
+        roleDO.setUpdateBy(SecurityUtils.getLoginName());
+
+        roleDO.setUpdateDate(LocalDateTime.now().toString());
+
+        roleDO.setIsUsed(1);
+
+        roleService.update(roleDO);
+
+        List<RoleMenuDO> roleMenuDOList = roleService.getMenusByRoleId(roleInfoReqDTO.getRoleId());
+
+        List<Integer> menuIds = new ArrayList<>();
+
+        List<Integer> selectMenuIds = roleInfoReqDTO.getMenuIds();
+        List<MenuDO> menuDOList = menuService.getMenusByTypes(new ArrayList<Integer>() {{
+            add(0);
+            add(1);
+        }});
+
+        List<Integer> parentMenuIds = new ArrayList<>();
+
+        for(int i = 0;i<menuDOList.size();i++) {
+
+            parentMenuIds.add(i,menuDOList.get(i).getMenuId());
+        }
+
+        selectMenuIds.removeAll(parentMenuIds);
+
+        for(int i = 0;i<roleMenuDOList.size();i++) {
+
+            menuIds.add(i,roleMenuDOList.get(i).getMenuId());
+        }
+
+        roleService.updateMenu(roleDO.getRoleId(),selectMenuIds,menuIds);
 
         return GenericRspDTO.newInstance(MsgEnum.SUCCESS);
 
     }
+
 
     @GetMapping("/lists")
     public GenericRspDTO<RolePageRspDTO> list(@QueryBody RoleDO roleDO) {
@@ -97,6 +147,31 @@ public class RoleController {
         roleRspDTO.setTotal(pageInfo.getTotal());
         return GenericRspDTO.newInstance(MsgEnum.SUCCESS,roleRspDTO);
 
+    }
+
+    @GetMapping("/info/{id}")
+    public GenericRspDTO<RoleInfoRspDTO> getRoleInfoById(@PathVariable("id") int id) {
+
+        RoleDO roleDO = roleService.get(id);
+
+        RoleMenuDO roleMenuDO = new RoleMenuDO();
+        roleMenuDO.setRoleId(id);
+        roleMenuDO.setIsUsed(1);
+
+        List<RoleMenuDO> roleMenuDOList = roleService.findRoleMenu(roleMenuDO);
+
+        List<Integer> menuIds = new ArrayList<>();
+
+        for(int i = 0;i<roleMenuDOList.size();i++) {
+
+            menuIds.add(i,roleMenuDOList.get(i).getMenuId());
+        }
+
+        RoleInfoRspDTO roleInfoRspDTO = new RoleInfoRspDTO();
+        roleInfoRspDTO.setRoleName(roleDO.getRoleName());
+        roleInfoRspDTO.setMenuIds(menuIds);
+
+        return GenericRspDTO.newInstance(MsgEnum.SUCCESS,roleInfoRspDTO);
     }
 
 

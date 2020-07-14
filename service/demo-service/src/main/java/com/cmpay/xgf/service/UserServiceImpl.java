@@ -1,6 +1,7 @@
 package com.cmpay.xgf.service;
 
 import com.cmpay.lemon.common.exception.BusinessException;
+import com.cmpay.lemon.framework.security.SecurityUtils;
 import com.cmpay.lemon.framework.utils.IdGenUtils;
 import com.cmpay.xgf.dao.IUserDao;
 import com.cmpay.xgf.dao.IUserRoleDao;
@@ -76,9 +77,9 @@ public class UserServiceImpl implements UserService{
 
         userRoleDO.setRoleId(roleId);
 
-        userRoleDO.setCreateBy("xgf");
+        userRoleDO.setCreateBy(SecurityUtils.getLoginName());
         userRoleDO.setCreateDate(LocalDateTime.now().toString());
-        userRoleDO.setUpdateBy("xgf");
+        userRoleDO.setUpdateBy(SecurityUtils.getLoginName());
         userRoleDO.setUpdateDate(LocalDateTime.now().toString());
         userRoleDO.setIsUsed(1);
 
@@ -102,7 +103,7 @@ public class UserServiceImpl implements UserService{
 
         userRoleDO.setRoleId(roleId);
 
-        userRoleDO.setUpdateBy("xgf");
+        userRoleDO.setUpdateBy(SecurityUtils.getLoginName());
         userRoleDO.setUpdateDate(LocalDateTime.now().toString());
         userRoleDO.setIsUsed(1);
 

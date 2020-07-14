@@ -6,8 +6,11 @@ dependencies {
     compile("org.projectlombok:lombok")
     // 验证码
     compile("com.github.axet:kaptcha:0.0.9")
-
-
+    //登录权限效验包
+    compile("com.cmpay:lemon-framework-web")
+    compile("com.cmpay:lemon-framework-starter-session")
+    compile("com.cmpay:lemon-framework-starter-security")
+    compile("com.cmpay:lemon-framework-starter-security-refresh")
 }
 jar {
     manifest {

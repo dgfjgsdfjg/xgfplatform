@@ -1,6 +1,7 @@
 package com.cmpay.xgf.service;
 
 import com.cmpay.xgf.entity.RoleDO;
+import com.cmpay.xgf.entity.RoleMenuDO;
 import com.cmpay.xgf.entity.UserDO;
 import org.springframework.stereotype.Service;
 
@@ -57,4 +58,33 @@ public interface RoleService {
      * @param menuIds
      */
     void insertMenu(int roleId, List<Integer> roleMenuIds,List<Integer> menuIds);
+
+    /**
+     * 通过角色Id查找菜单集合
+     * @param roleId
+     * @return
+     */
+    List<RoleMenuDO> getMenusByRoleId(Integer roleId);
+
+    /**
+     * 更新角色
+     * @param roleDO
+     * @return
+     */
+    void update(RoleDO roleDO);
+
+    /**
+     * 为角色更新菜单
+     * @param roleId
+     * @param selectMenuIds
+     * @param menuIds
+     */
+    void updateMenu(int roleId,List<Integer> selectMenuIds,List<Integer> menuIds);
+
+    /**
+     * 查找角色菜单表
+     * @param roleMenuDO
+     * @return List<RoleMenuDO>
+     */
+    List<RoleMenuDO> findRoleMenu(RoleMenuDO roleMenuDO);
 }

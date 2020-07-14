@@ -1,6 +1,7 @@
 package com.cmpay.xgf.service;
 
 import com.cmpay.lemon.common.exception.BusinessException;
+import com.cmpay.lemon.framework.security.SecurityUtils;
 import com.cmpay.xgf.dao.IRoleDao;
 import com.cmpay.xgf.dao.IRoleMenuDao;
 import com.cmpay.xgf.entity.RoleDO;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -83,9 +85,9 @@ public class RoleServiceImpl implements RoleService {
 
             roleMenuDO.setMenuId(menuIds.get(i));
 
-            roleMenuDO.setCreateBy("xgf");
+            roleMenuDO.setCreateBy(SecurityUtils.getLoginName());
             roleMenuDO.setCreateDate(LocalDateTime.now().toString());
-            roleMenuDO.setUpdateBy("xgf");
+            roleMenuDO.setUpdateBy(SecurityUtils.getLoginName());
             roleMenuDO.setUpdateDate(LocalDateTime.now().toString());
             roleMenuDO.setIsUsed(1);
 
@@ -99,6 +101,68 @@ public class RoleServiceImpl implements RoleService {
             BusinessException.throwBusinessException(MsgEnum.DB_INSERT_FAILED);
         }
 
+    }
+
+    @Override
+    public List<RoleMenuDO> getMenusByRoleId(Integer roleId) {
+
+        return roleMenuDao.getMenusByRoleId(roleId);
+    }
+
+    @Override
+    public void update(RoleDO roleDO) {
+
+        int res = roleDao.update(roleDO);
+
+        if (res != 1) {
+            BusinessException.throwBusinessException(MsgEnum.DB_UPDATE_FAILED);
+        }
+    }
+
+    @Override
+    public void updateMenu(int roleId,List<Integer> selectMenuIds,List<Integer> menuIds) {
+
+        menuIds.removeAll(selectMenuIds);
+
+        for(int i = 0;i<menuIds.size();i++) {
+
+            RoleMenuDO tempRoleMenuDO = new RoleMenuDO();
+            tempRoleMenuDO.setRoleId(roleId);
+            tempRoleMenuDO.setMenuId(menuIds.get(i));
+            tempRoleMenuDO.setId(roleMenuDao.find(tempRoleMenuDO).get(0).getId());
+            tempRoleMenuDO.setUpdateBy(SecurityUtils.getLoginName());
+            tempRoleMenuDO.setUpdateDate(LocalDateTime.now().toString());
+            tempRoleMenuDO.setIsUsed(0);
+
+            int res = roleMenuDao.update(tempRoleMenuDO);
+
+            if (res != 1) {
+                BusinessException.throwBusinessException(MsgEnum.DB_UPDATE_FAILED);
+            }
+        }
+
+        for(int i = 0;i<selectMenuIds.size();i++) {
+
+            RoleMenuDO roleMenuDO = new RoleMenuDO();
+            roleMenuDO.setRoleId(roleId);
+            roleMenuDO.setMenuId(selectMenuIds.get(i));
+            roleMenuDO.setId(roleMenuDao.find(roleMenuDO).get(0).getId());
+            roleMenuDO.setUpdateBy(SecurityUtils.getLoginName());
+            roleMenuDO.setUpdateDate(LocalDateTime.now().toString());
+            roleMenuDO.setIsUsed(1);
+
+            int res = roleMenuDao.update(roleMenuDO);
+
+            if (res != 1) {
+                BusinessException.throwBusinessException(MsgEnum.DB_UPDATE_FAILED);
+            }
+        }
+    }
+
+    @Override
+    public List<RoleMenuDO> findRoleMenu(RoleMenuDO roleMenuDO) {
+
+        return roleMenuDao.find(roleMenuDO);
     }
 
 

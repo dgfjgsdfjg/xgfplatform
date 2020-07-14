@@ -2,10 +2,14 @@ package com.cmpay.xgf.service;
 
 import com.cmpay.lemon.common.exception.BusinessException;
 import com.cmpay.lemon.common.utils.BeanUtils;
+import com.cmpay.lemon.framework.security.SecurityUtils;
 import com.cmpay.xgf.dao.IMenuDao;
+import com.cmpay.xgf.dao.IUserRoleDao;
 import com.cmpay.xgf.dto.MenuInfoDTO;
 import com.cmpay.xgf.entity.MenuDO;
+import com.cmpay.xgf.entity.RoleDO;
 import com.cmpay.xgf.entity.RoleMenuDO;
+import com.cmpay.xgf.entity.UserRoleDO;
 import com.cmpay.xgf.enums.MsgEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +28,10 @@ public class MenuServiceImpl implements MenuService {
 
     @Autowired
     IMenuDao menuDao;
+
+    @Autowired
+    IUserRoleDao userRoleDao;
+
 
 
     @Override
@@ -92,6 +100,27 @@ public class MenuServiceImpl implements MenuService {
         return mapList;
     }
 
+    @Override
+    public List<MenuDO> getMenusByTypes(List<Integer> types) {
+
+        return menuDao.getMenusByTypes(types);
+    }
+
+    @Override
+    public void insert(MenuDO menuDO) {
+
+        int res = menuDao.insert(menuDO);
+
+        if (res != 1) {
+            BusinessException.throwBusinessException(MsgEnum.DB_INSERT_FAILED);
+        }
+    }
+
+    @Override
+    public MenuDO getByOperate(String operate) {
+
+        return menuDao.getByOperate(operate);
+    }
 
 
 }
